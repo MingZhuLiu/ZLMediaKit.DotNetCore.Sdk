@@ -18,6 +18,7 @@ namespace STRealVideo.Control
             var resRestartServer = client.restartServer();//重启服务器,只有Daemon方式才能重启，否则是直接关闭！
             var resMediaList = client.getMediaList();//获取流列表，可选筛选参数
             var resCloseStream = client.closeStream("rtsp", "127.0.0.1", "live", "test");//关闭流(目前所有类型的流都支持关闭)
+            var resCloseStreams = client.closeStreams("rtsp", "127.0.0.1", "live", "test");//关闭流(目前所有类型的流都支持关闭)
             var resSessions = client.getAllSession();//获取所有TcpSession列表(获取所有tcp客户端相关信息)
             //var resKillSession = client.kickSession(resSessions.data[0].id);//断开tcp连接，比如说可以断开rtsp、rtmp播放器等
             //var resKillSessions = client.kickSessions(null, "127.0.0.1");//断开tcp连接，比如说可以断开rtsp、rtmp播放器等

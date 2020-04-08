@@ -12,7 +12,7 @@ namespace STRealVideo.Lib.Common
     public class QxHttpClient
     {
         public HttpClient _httpClient = null;
-       private readonly HttpClientHandler handler = null;
+        private readonly HttpClientHandler handler = null;
 
         /// <summary>
         /// 默认语言
@@ -50,10 +50,8 @@ namespace STRealVideo.Lib.Common
         /// </summary>
         public enum ContentType
         {
-            [Description("application/x-www-form-unlencoded")]
             x_www_form_unlencoded,
 
-            [Description("application/json")]
             json
         }
 
@@ -141,7 +139,8 @@ namespace STRealVideo.Lib.Common
         public T Post<T>(string url, string data, ContentType contentType, bool ignoreHttpErrorrCode = false)
         {
             Object result = null;
-            StringContent content = new StringContent(data, DefaultEncoding, Tools.GetDescription(contentType));
+            var ct = contentType == ContentType.json ? "application/json" : "application/x-www-form-unlencoded";
+            StringContent content = new StringContent(data, DefaultEncoding, ct);
             HttpResponseMessage httpResult = _httpClient.PostAsync(new Uri(url), content).Result;
             if (ignoreHttpErrorrCode || httpResult.StatusCode == HttpStatusCode.OK)
             {

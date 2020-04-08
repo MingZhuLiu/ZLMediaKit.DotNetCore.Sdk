@@ -221,6 +221,35 @@ namespace STRealVideo.Lib
             return response;
         }
 
+
+        public CloseStreamsResponse closeStreams(string schema = null, string vhost = null, string app = null, string stream = null, bool? force = false)
+        {
+
+            CloseStreamsResponse response = new CloseStreamsResponse();
+            response.code = -300;
+            var para = NewPara;
+            if (!String.IsNullOrWhiteSpace(schema))
+                para.AddPara("schema", schema);
+            if (String.IsNullOrWhiteSpace(vhost))
+                para.AddPara("vhost", vhost);
+            if (String.IsNullOrWhiteSpace(app))
+                para.AddPara("app", app);
+            if (String.IsNullOrWhiteSpace(stream))
+                para.AddPara("schema", schema);
+            para.AddPara("force", force.HasValue && force.Value ? "1" : "0");
+
+            var json = httpClient.Post<String>(apiUrl + "/index/api/close_streams", para, QxHttpClient.ContentType.json);
+            if (String.IsNullOrWhiteSpace(json))
+            {
+                return response;
+            }
+            else
+            {
+                response = JsonSerializer.Deserialize<CloseStreamsResponse>(json);
+            }
+            return response;
+        }
+
         /// <summary>
         /// 获取所有TcpSession列表(获取所有tcp客户端相关信息)
         /// </summary>
