@@ -8,15 +8,14 @@ namespace STRealVideo.Control
         static void Main(string[] args)
         {
 
+
+            
             ZLClient client = new ZLClient("http://127.0.0.1/", "035c73f7-bb6b-4889-a715-d9eb2d1925cc");
-
-
-
             var resThreadsLoad = client.getThreadsLoad();//获取各epoll(或select)线程负载以及延时
             var resWorkThreadsLoad = client.getWorkThreadsLoad();//获取各后台epoll(或select)线程负载以及延时
             var resServerConfigs = client.getServerConfig();//获取服务器配置
             var resSetConfig = client.setServerConfig("api.apiDebug", "1");//将服务器参数api.apiDebug设置为0
-            //var resRestartServer = client.restartServer();//重启服务器,只有Daemon方式才能重启，否则是直接关闭！
+            var resRestartServer = client.restartServer();//重启服务器,只有Daemon方式才能重启，否则是直接关闭！
             var resMediaList = client.getMediaList();//获取流列表，可选筛选参数
             var resCloseStream = client.closeStream("rtsp", "127.0.0.1", "live", "test");//关闭流(目前所有类型的流都支持关闭)
             var resSessions = client.getAllSession();//获取所有TcpSession列表(获取所有tcp客户端相关信息)
