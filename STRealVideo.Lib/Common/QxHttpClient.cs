@@ -17,7 +17,7 @@ namespace STRealVideo.Lib.Common
         /// <summary>
         /// 默认语言
         /// </summary>
-        public Encoding DefaultEncoding = Encoding.GetEncoding("GB2312");
+        public Encoding DefaultEncoding = Encoding.UTF8;
 
 
         public delegate void HttpProgress(int progress);

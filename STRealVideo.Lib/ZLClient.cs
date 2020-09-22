@@ -22,7 +22,7 @@ namespace STRealVideo.Lib
         /// </summary>
         /// <param name="apiUrl">服务器API地址</param>
         /// <param name="secret">密钥</param>
-        public ZLClient(string apiUrl, string secret = null)
+        public ZLClient(string apiUrl, string secret = null,Encoding encoding=null)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             if (String.IsNullOrWhiteSpace(secret))
@@ -40,8 +40,14 @@ namespace STRealVideo.Lib
             this.secret = secret;
             this.apiUrl = apiUrl;
             httpClient = new QxHttpClient();
+            if (encoding == null)
+                httpClient.DefaultEncoding = Encoding.UTF8;
+            else
+                httpClient.DefaultEncoding = encoding;
         }
 
+
+        public QxHttpClient HttpClient => httpClient;
 
         /// <summary>
         /// 获取各epoll(或select)线程负载以及延时
@@ -53,7 +59,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/getThreadsLoad", "", QxHttpClient.ContentType.x_www_form_unlencoded);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -72,7 +78,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/getWorkThreadsLoad", "", QxHttpClient.ContentType.x_www_form_unlencoded);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -93,7 +99,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/getServerConfig", NewPara, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -138,7 +144,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/restartServer", NewPara, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -212,7 +218,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/close_stream", para, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -272,7 +278,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/getAllSession", para, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -295,7 +301,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/kick_session", NewPara.AddPara("Id", id), QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -327,7 +333,7 @@ namespace STRealVideo.Lib
             if (String.IsNullOrWhiteSpace(json))
             {
                 response.code = -300;
-                response.msg = "Server return empty!";
+                response.msg = "Server return empty Or Connect failed!";
             }
             else
             {
@@ -377,7 +383,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/addStreamProxy", para, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -404,7 +410,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/delStreamProxy", para, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -434,7 +440,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/addFFmpegSource", para, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -460,7 +466,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/delFFmpegSource", para, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
@@ -593,7 +599,7 @@ namespace STRealVideo.Lib
             var json = httpClient.Post<String>(apiUrl + "/index/api/getMp4RecordFile", para, QxHttpClient.ContentType.json);
             if (String.IsNullOrWhiteSpace(json))
             {
-                response.Failed("Server return empty!");
+                response.Failed("Server return empty Or Connect failed!");
             }
             else
             {
