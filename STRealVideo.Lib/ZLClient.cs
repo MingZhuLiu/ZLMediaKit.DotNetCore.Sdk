@@ -356,7 +356,7 @@ namespace STRealVideo.Lib
         /// <param name="enable_mp4">是否mp4录制</param>
         /// <param name="rtp_type">rtsp拉流时，拉流方式，tcp，udp，组播</param>
         /// <returns></returns>
-        public ZLResponse<BodyKey> addStreamProxy(string vhost, string app, string stream, string url, bool enable_rtsp, bool enable_rtmp, bool? enable_hls = null, bool? enable_mp4 = null, RTPPullType? rtp_type = null)
+        public ZLResponse<BodyKey> addStreamProxy(string vhost, string app, string stream, string url, bool? enable_hls = null, bool? enable_mp4 = null, RTPPullType? rtp_type = null)
         {
             ZLResponse<BodyKey> response = new ZLResponse<BodyKey>();
 
@@ -370,9 +370,7 @@ namespace STRealVideo.Lib
             para.AddPara("vhost", vhost)
             .AddPara("app", app)
             .AddPara("stream", stream)
-            .AddPara("url", url)
-            .AddPara("enable_rtsp", enable_rtsp ? "1" : "0")
-            .AddPara("enable_rtmp", enable_rtmp ? "1" : "0");
+            .AddPara("url", url);
             if (enable_hls.HasValue)
                 para.AddPara("enable_hls", enable_hls.Value ? "1" : "0");
             if (enable_mp4.HasValue)

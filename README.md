@@ -24,7 +24,7 @@
             var resSessions = client.getAllSession();//获取所有TcpSession列表(获取所有tcp客户端相关信息)
             var resKillSession = client.kickSession(resSessions.data[0].id);//断开tcp连接，比如说可以断开rtsp、rtmp播放器等
             var resKillSessions = client.kickSessions(null, "127.0.0.1");//断开tcp连接，比如说可以断开rtsp、rtmp播放器等
-            var resAddStream = client.addStreamProxy("__defaultVhost__", "live", "0", "rtsp://admin:12356789a@192.168.1.3:554/h264/ch1/main/av_stream", true, true, true, true, RTPPullType.TCP);//动态添加rtsp/rtmp拉流代理(只支持H264/H265/aac负载)
+            var resAddStream = client.addStreamProxy("__defaultVhost__", "live", "0", "rtsp://admin:12356789a@192.168.1.3:554/h264/ch1/main/av_stream", true, true, RTPPullType.TCP);//动态添加rtsp/rtmp拉流代理(只支持H264/H265/aac负载)
             var resDelStream = client.delStreamProxy("xxxxxxxxx");//关闭拉流代理
             var resAddFFmpegSource = client.addFFmpegSource("http://127.0.0.1/live/0/hls.m3u8", "rtmp://127.0.0.1/live/2", 10000);//通过fork FFmpeg进程的方式拉流代理，支持任意协议
             var resDelFFmpegSource = client.delFFmpegSource("xxxxxxxxx");//关闭ffmpeg拉流代理
