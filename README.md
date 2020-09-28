@@ -13,6 +13,7 @@
 ## 调用方法参考
      
             ZLClient client = new ZLClient("http://127.0.0.1/", "035c73f7-bb6b-4889-a715-d9eb2d1925cc");
+            var snapImageResponse = client.getSnap("rtmp://1.1.1.1/live/cctv", 10, 0); //捕捉截图
             var resThreadsLoad = client.getThreadsLoad();//获取各epoll(或select)线程负载以及延时
             var resWorkThreadsLoad = client.getWorkThreadsLoad();//获取各后台epoll(或select)线程负载以及延时
             var resServerConfigs = client.getServerConfig();//获取服务器配置

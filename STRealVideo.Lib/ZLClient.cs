@@ -705,5 +705,33 @@ namespace STRealVideo.Lib
             return response;
         }
 
+
+        public ZLResponse<byte[]> getSnap(string url,int timeout_sec,int expire_sec)
+        {
+            ZLResponse<byte[]> response = new ZLResponse<byte[]>();
+
+            var para = NewPara;
+            if (String.IsNullOrWhiteSpace(url))
+                return response.Failed("url is null!");
+            para.AddPara("url", url);
+            para.AddPara("timeout_sec", timeout_sec+"");
+            para.AddPara("expire_sec", expire_sec+"");
+
+            var data = httpClient.Post<byte[]>(apiUrl + "/index/api/getSnap", para, QxHttpClient.ContentType.json);
+            if(data==null||data.Length==0)
+            {
+                response.code = -300;
+                response.Failed("Get SNAP Failed,Server Return NULL!");
+
+            }
+            else
+            {
+                response.code = 0;
+                response.data = data;
+            }
+            
+            return response;
+        }
+
     }
 }
