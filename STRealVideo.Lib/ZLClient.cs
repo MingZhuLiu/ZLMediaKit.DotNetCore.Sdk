@@ -180,6 +180,7 @@ namespace STRealVideo.Lib
             }
             else
             {
+                json=json.Replace("-nan(ind)","0");//TODO  特殊修补，防止异常
                 response = JsonSerializer.Deserialize<ZLResponse<List<MediaStream>>>(json);
             }
             return response;

@@ -20,6 +20,16 @@ namespace STRealVideo.Lib.Models
         /// </summary>
         public CodecType codec_type { get; set; }
 
+        public string codec_id_name{get;set;}
+
+        public int? height{get;set;}
+        public int? width{get;set;}
+        public int? fps{get;set;}
+
+        public int? sample_bit{get;set;}
+        public int? sample_rate{get;set;}
+        public int? channels{get;set;}
+
 
         /// <summary>
         /// 轨道是否准备就绪
